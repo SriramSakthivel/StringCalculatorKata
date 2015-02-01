@@ -58,5 +58,16 @@ namespace StringCalculatorKata.UnitTest
             TestDelegate code = () => sut.Add(numbers);
             Assert.That(code, Throws.ArgumentException.With.Message.ContainsSubstring(expectedError));
         }
+
+        [Test]
+        [TestCase("1\n2,3000,6,1001", 9), TestCase("1\n2,3000,6,1001,1000", 1009)]
+        public void IgnoreNumbersGreaterThan1000(string numbers, int expected)
+        {
+            StringCalculator sut = new StringCalculator();
+
+            int result = sut.Add(numbers);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
     }
 }
