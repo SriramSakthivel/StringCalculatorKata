@@ -7,7 +7,7 @@ namespace StringCalculatorKata
         public int Add(string numbers)
         {
             return numbers
-                .Split(',')
+                .Split(',', '\n')
                 .Sum(item => item.TryParseOrDefault());
         }
     }
