@@ -48,5 +48,15 @@ namespace StringCalculatorKata.UnitTest
 
             Assert.That(result, Is.EqualTo(expected));
         }
+
+        [Test]
+        [TestCase("1\n2,-3", "-3"), TestCase("1\n-2,-1","-2,-1")]
+        public void ThrowException_GivenNegativeNumbers(string numbers, string expectedError)
+        {
+            StringCalculator sut = new StringCalculator();
+
+            TestDelegate code = () => sut.Add(numbers);
+            Assert.That(code, Throws.ArgumentException.With.Message.ContainsSubstring(expectedError));
+        }
     }
 }
